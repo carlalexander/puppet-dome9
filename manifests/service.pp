@@ -17,7 +17,6 @@ class dome9::service {
   service { "dome9d":
     ensure     => running,
     enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+    hasstatus  => false,
   }
 }
