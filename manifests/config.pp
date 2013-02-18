@@ -21,7 +21,6 @@ class dome9::config(
   }
 
   exec { 'add pairkey':
-    command => "dome9d pair -k $pairkey",
-    notify  => Class['dome9::service']
+    command => "/usr/bin/dome9d pair -k $pairkey"
   }
 }
