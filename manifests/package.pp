@@ -21,7 +21,7 @@ class dome9::package {
   }
 
   exec { 'dome9.list':
-    command => "echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list",
+    command => "/bin/echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list",
     creates => '/etc/apt/sources.list.d/dome9.list'
   }
 
