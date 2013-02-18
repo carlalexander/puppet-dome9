@@ -13,9 +13,9 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class openssh_server::config(
+class dome9::config(
   $pairkey = undef
-) inherits openssh_server::params {
+)  {
   if ($pairkey == undef) {
     fail('You must specify a pairkey')
   }
