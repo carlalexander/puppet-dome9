@@ -13,11 +13,17 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class dome9::package {
+class dome9::package (
+  $pairkey = undef
+) {
   File {
     owner => 'root',
     group => 'root',
     mode  => '0644',
+  }
+
+  if ($pairkey == undef) {
+    fail('You must specify a pairkey')
   }
 
   exec { 'dome9-key.asc':
@@ -33,6 +39,12 @@ class dome9::package {
 
   package { 'dome9agent':
     ensure  => latest,
-    require => Exec['dome9.list']
+    require => Exec['dome9.list'],
+    notify  => Exec['pairkey']
+  }
+
+  exec { 'pairkey':
+    command     => "/usr/sbin/dome9d pair -k $pairkey",
+    refreshonly => true
   }
 }
