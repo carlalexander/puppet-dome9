@@ -20,7 +20,7 @@ class dome9::package {
     mode  => '0644',
   }
 
-  file { 'dome9.list':
+  exec { 'dome9.list':
     command => "echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list",
     creates => '/etc/apt/sources.list.d/dome9.list'
   }
