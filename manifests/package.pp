@@ -32,6 +32,6 @@ class dome9::package {
 
   package { 'dome9agent':
     ensure  => latest,
-    require => [Exec['dome9-key.asc'], File['/etc/apt/sources.list.d/dome9.list']]
+    require => [Exec['dome9-key.asc'], Exec['dome9.list']]
   }
 }
