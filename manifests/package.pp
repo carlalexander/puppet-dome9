@@ -26,7 +26,7 @@ class dome9::package {
   }
 
   exec { 'dome9-key.asc':
-    command => '/usr/bin/wget -O - http://repository.dome9.com/ubuntu/dome9-key.asc | /usr/bin/apt-key add -',
+    command => '/usr/bin/wget -O - http://repository.dome9.com/ubuntu/dome9-key.asc | /usr/bin/apt-key add -; /usr/bin/apt-get update;',
     unless  => '/usr/bin/apt-key list | /bin/grep -c dome9-key.asc',
   }
 

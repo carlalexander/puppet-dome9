@@ -20,7 +20,8 @@ class dome9::config(
     fail('You must specify a pairkey')
   }
 
-  exec { 'add pairkey':
-    command => "/usr/sbin/dome9d pair -k $pairkey"
+  exec { 'pairkey':
+    command => "/usr/sbin/dome9d pair -k $pairkey",
+    creates => '/etc/dome9/generic_prod.pem'
   }
 }
