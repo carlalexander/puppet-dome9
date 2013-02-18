@@ -20,9 +20,9 @@ class dome9::package {
     mode  => '0644',
   }
 
-  file { '/etc/apt/sources.list.d/dome9.list':
-    ensure => present,
-    source  => "puppet:///dome9/dome9.list"
+  file { 'dome9.list':
+    command => "echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list",
+    creates => '/etc/apt/sources.list.d/dome9.list'
   }
 
   exec { 'dome9-key.asc':

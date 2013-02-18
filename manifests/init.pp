@@ -29,5 +29,6 @@ class dome9 (
     require => Class['dome9::package'],
     notify  => Class['dome9::service'],
   }
+  
   class { 'dome9::service': }
 }
