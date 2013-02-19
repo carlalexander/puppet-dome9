@@ -1,6 +1,6 @@
 # Class: dome9::package
 #
-# This module manages OpenSSH Server package installation
+# This module manages Dome9 package installation
 #
 # Parameters:
 #
@@ -16,6 +16,9 @@
 class dome9::package (
   $pairkey = undef
 ) {
+  Exec {
+    path => '/bin:/sbin:/usr/bin:/usr/sbin',
+  }
   File {
     owner => 'root',
     group => 'root',
@@ -27,12 +30,12 @@ class dome9::package (
   }
 
   exec { 'dome9-key.asc':
-    command => '/usr/bin/wget -O - http://repository.dome9.com/ubuntu/dome9-key.asc | /usr/bin/apt-key add -',
-    unless  => '/usr/bin/apt-key list | /bin/grep -c dome9-key.asc',
+    command => 'wget -O - http://repository.dome9.com/ubuntu/dome9-key.asc | apt-key add -',
+    unless  => 'apt-key list | grep -c dome9-key.asc',
   }
 
   exec { 'dome9.list':
-    command => "/bin/echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list && /usr/bin/apt-get update",
+    command => "echo 'deb http://repository.dome9.com/ubuntu lucid main' >> /etc/apt/sources.list.d/dome9.list && apt-get update",
     creates => '/etc/apt/sources.list.d/dome9.list',
     require => Exec['dome9-key.asc']
   }
@@ -44,7 +47,7 @@ class dome9::package (
   }
 
   exec { 'pairkey':
-    command     => "/usr/sbin/dome9d pair -k $pairkey",
+    command     => "dome9d pair -k ${pairkey}",
     refreshonly => true
   }
 }

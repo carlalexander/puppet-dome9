@@ -14,7 +14,7 @@
 #
 # This class file is not called directly
 class dome9::service {
-  service { "dome9d":
+  service { 'dome9d':
     ensure     => running,
     enable     => true,
     hasstatus  => false,
